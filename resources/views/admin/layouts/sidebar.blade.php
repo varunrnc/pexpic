@@ -13,6 +13,7 @@
     </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">
+        <li class="menu-label">Admin</li>
         <li>
             <a href="{{ route('admin.dashboard') }}">
                 <div class="parent-icon"><i class="bx bx-home-alt"></i></div>
@@ -28,33 +29,57 @@
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i></div>
-                <div class="menu-title">Application</div>
+                <div class="menu-title">Product</div>
             </a>
             <ul>
                 <li>
-                    <a href="app-emailbox.html"><i class="bx bx-radio-circle"></i>Email</a>
+                    <a href="app-emailbox.html"><i class="bx bx-radio-circle"></i>Category</a>
+                </li>
+                <li>
+                    <a href="app-emailbox.html"><i class="bx bx-radio-circle"></i>Product</a>
                 </li>
 
             </ul>
         </li>
-        <li class="menu-label">UI Elements</li>
-        <li>
-            <a href="widgets.html">
-                <div class="parent-icon"><i class="bx bx-cookie"></i></div>
-                <div class="menu-title">Widgets</div>
-            </a>
-        </li>
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class="bx bx-cart"></i></div>
-                <div class="menu-title">eCommerce</div>
+                <div class="parent-icon"><i class='bx bxs-folder'></i></div>
+                <div class="menu-title">Blog</div>
             </a>
             <ul>
                 <li>
-                    <a href="ecommerce-products.html"><i class="bx bx-radio-circle"></i>Products</a>
+                    <a href="app-emailbox.html"><i class="bx bx-radio-circle"></i>Blog Category</a>
+                </li>
+                <li>
+                    <a href="app-emailbox.html"><i class="bx bx-radio-circle"></i>Blog Content</a>
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bxs-user' ></i></div>
+                <div class="menu-title">Users</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="app-emailbox.html"><i class="bx bx-radio-circle"></i>View Users</a>
                 </li>
             </ul>
         </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bxs-photo-album' ></i></div>
+                <div class="menu-title">Orders</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="app-emailbox.html"><i class="bx bx-radio-circle"></i>View Orders</a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-label">Logout</li>
+        
         <li>
             <a href="{{route('admin.logout')}}">
                 <div class="parent-icon"><i class='bx bx-power-off text-danger'></i></div>
