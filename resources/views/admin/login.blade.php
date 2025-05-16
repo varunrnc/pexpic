@@ -40,19 +40,23 @@
 										<p class="mb-0">Please log in to your account</p>
 									</div>
 									<div class="form-body">
-										<form class="row g-3">
+										<form class="row g-3" action="{{ route('admin.login') }}" method="POST">
+											@csrf
 											<div class="col-12">
 												<label for="inputEmailAddress" class="form-label">Email</label>
-												<input type="email" class="form-control" id="inputEmailAddress" placeholder="example@gmail.com">
+												<input type="email" class="form-control" id="inputEmailAddress" name="email" placeholder="example@gmail.com">
+												@error('email')
+												<span class="text-danger">{{ $message }}</span>
+												@enderror
 											</div>
 											<div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Password</label>
 												<div class="input-group" id="show_hide_password">
-													<input type="password" class="form-control border-end-0" id="inputChoosePassword" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+													<input type="password" class="form-control border-end-0" name="password" id="inputChoosePassword" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
 												</div>
 											</div>
-											
-											<div class="col-md-6 text-end">	
+
+											<div class="col-md-6 text-end">
 											</div>
 											<div class="col-12">
 												<div class="d-grid">
@@ -60,6 +64,14 @@
 												</div>
 											</div>
 										</form>
+
+										@if ($errors->any())
+										@foreach ($errors->all() as $error)
+										<div class="mt-3 text-center">
+											<span class="text-danger mb-3"> {{ $error }}</span>
+										</div>
+										@endforeach
+										@endif
 									</div>
 
 								</div>
@@ -81,8 +93,8 @@
 	<script src="{{ asset('public/assets/admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
 	<!--Password show & hide js -->
 	<script>
-		$(document).ready(function () {
-			$("#show_hide_password a").on('click', function (event) {
+		$(document).ready(function() {
+			$("#show_hide_password a").on('click', function(event) {
 				event.preventDefault();
 				if ($('#show_hide_password input').attr("type") == "text") {
 					$('#show_hide_password input').attr('type', 'password');
@@ -99,4 +111,5 @@
 	<!--app JS-->
 	<script src="{{ asset('public/assets/admin/js/app.js') }}"></script>
 </body>
+
 </html>

@@ -35,25 +35,35 @@
 										<!-- <img src="assets/images/logo-icon.png" width="60" alt="" /> -->
 										<h3 class="text-primary">Pexpic</h3>
 									</div>
-									<div class="text-center mb-4">
+									<l class="text-center mb-4">
 										<h5 class="">Create An Account</h5>
 										<p class="mb-0">Please fill the below details to create your account</p>
 									</div>
 									<div class="form-body">
-										<form class="row g-3">
+										<form class="row g-3" action="{{ route('admin.register') }}" method="POST">
+											@csrf
 											<div class="col-12">
-												<label for="inputUsername" class="form-label">Username</label>
-												<input type="email" class="form-control" id="inputUsername" placeholder="username">
+												<label for="inputName" class="form-label">Name</label>
+												<input type="text" class="form-control border {{ $errors->has('input_name') ? 'border-danger' : '' }}" id="inputName" name="input_name" placeholder="Enter Your Name" value="{{ old('input_name') }}">
+												@error('input_name')
+													<span class="text-danger">{{$message}}</span>
+												@enderror
 											</div>
 											<div class="col-12">
 												<label for="inputEmailAddress" class="form-label">Email Address</label>
-												<input type="email" class="form-control" id="inputEmailAddress" placeholder="example@gmail.com">
+												<input type="email" class="form-control border {{ $errors->has('input_email') ? 'border-danger' : '' }}" id="inputEmailAddress" name="input_email" placeholder="example@gmail.com" value="{{ old('input_email') }}">
+												@error('input_email')
+													<span class="text-danger">{{$message}}</span>
+												@enderror
 											</div>
 											<div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Password</label>
 												<div class="input-group" id="show_hide_password">
-													<input type="password" class="form-control border-end-0" id="inputChoosePassword" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+													<input type="password" class="form-control border-end-0 border {{ $errors->has('password') ? 'border-danger' : '' }}" id="inputChoosePassword" name="password" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
 												</div>
+												@error('password')
+													<span class="text-danger">{{$message}}</span>
+												@enderror
 											</div>
 											<div class="col-12">
 												<div class="d-grid">

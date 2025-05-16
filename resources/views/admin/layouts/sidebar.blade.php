@@ -14,15 +14,16 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li>
-            <a href="javascript:;" class="has-arrow">
+            <a href="{{ route('admin.dashboard') }}">
                 <div class="parent-icon"><i class="bx bx-home-alt"></i></div>
                 <div class="menu-title">Dashboard</div>
             </a>
-            <ul>
-                <li>
-                    <a href="index.html"><i class="bx bx-radio-circle"></i>Default</a>
-                </li>
-            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <div class="parent-icon"><i class='bx bxs-book-content'></i></div>
+                <div class="menu-title">Slider</div>
+            </a>
         </li>
         <li>
             <a href="javascript:;" class="has-arrow">
@@ -53,6 +54,12 @@
                     <a href="ecommerce-products.html"><i class="bx bx-radio-circle"></i>Products</a>
                 </li>
             </ul>
+        </li>
+        <li>
+            <a href="{{route('admin.logout')}}">
+                <div class="parent-icon"><i class='bx bx-power-off text-danger'></i></div>
+                <div class="menu-title text-danger">Logout</div>
+            </a>
         </li>
 
     </ul>
