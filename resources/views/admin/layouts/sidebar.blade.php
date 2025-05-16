@@ -21,7 +21,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{{route('admin.slider.index')}}">
                 <div class="parent-icon"><i class='bx bxs-book-content'></i></div>
                 <div class="menu-title">Slider</div>
             </a>
