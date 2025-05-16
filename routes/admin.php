@@ -74,4 +74,6 @@ Route::prefix("admin")->group(function () {
             Route::put('/blog-status', 'status')->name('status');
             Route::delete('/blog-delete', 'delete')->name('delete');
         });
+
+        // check git hub
 });
