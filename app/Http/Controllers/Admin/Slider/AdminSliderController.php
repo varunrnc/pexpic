@@ -7,5 +7,10 @@ use Illuminate\Http\Request;
 
 class AdminSliderController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $this->middleware('XSS');
+    }
+
+    
 }

@@ -9,25 +9,30 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminDashboardController extends Controller
 {
+    protected $adminGuard;
+
     public function __construct()
     {
         $this->middleware('XSS');
+        $this->adminGuard = Auth::guard('admin');
     }
+
+    private function admin()
+    {
+        return $this->adminGuard;
+    }
+
     public function index()
     {
-        if (Auth::guard('admin')->user()) {
-            return view('admin.dashboard');
-        } else {
-            return redirect()->route('admin.login');
-        }
+        return $this->admin()->check()
+            ? view('admin.dashboard')
+            : redirect()->route('admin.login');
     }
     public function registerView()
     {
-        if (Auth::guard('admin')->user()) {
-            return redirect()->route('admin.dashboard');
-        } else {
-            return view('admin.signup');
-        }
+        return $this->admin()->check()
+            ? redirect()->route('admin.dashboard')
+            : view('admin.signup');
     }
 
     public function register(Request $request)
@@ -48,11 +53,9 @@ class AdminDashboardController extends Controller
 
     public function loginView()
     {
-        if(Auth::guard('admin')->user()) {
-            return redirect()->route('admin.dashboard');
-        }else{
-            return view('admin.login');
-        }
+        return $this->admin()->check()
+            ? redirect()->route('admin.dashboard')
+            : view('admin.login');
     }
 
     public function login(Request $request)
@@ -62,23 +65,18 @@ class AdminDashboardController extends Controller
             'password' => 'required|min:8'
         ]);
 
-        $admin = Admin::Where('email', $request->only('email'))->first();
-        if($admin == null) {
-            return redirect()->back()->withErrors(['error' => 'Email Not Found!']);
-        }
-
         $credentials = $request->only('email', 'password');
 
-        if(Auth::guard('admin')->attempt($credentials, $request->boolean('remember'))){
+        if ($this->admin()->attempt($credentials, $request->boolean('remember'))) {
             return redirect()->route('admin.dashboard');
-        }else{
-            return redirect()->back()->withErrors(['error' => 'Invalid Credentials']);
         }
+
+        return redirect()->back()->withErrors(['error' => 'Invalid Credentials']);
     }
 
     public function logout()
     {
-        Auth::guard('admin')->logout();
+        $this->admin()->logout();
         return redirect()->route('admin.login');
     }
 }
