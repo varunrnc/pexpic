@@ -31,7 +31,6 @@ Route::prefix("admin")->group(function () {
         ->name('admin.slider.')
         ->group(function () {
             Route::get('/slider', 'index')->name('index');
-            Route::get('/slider-create', 'create')->name('create');
             Route::post('/slider-store', 'store')->name('store');
             Route::get('/slider-edit', 'edit')->name('edit');
             Route::put('/slider-update', 'update')->name('update');

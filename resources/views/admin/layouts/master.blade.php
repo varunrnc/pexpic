@@ -19,6 +19,7 @@
 	<link href="{{ asset('public/assets/admin/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('public/assets/admin/css/icons.css') }}" rel="stylesheet">
     <title>Admin</title>
+    @yield('page-css')
 </head>
 
 <body>
@@ -58,6 +59,7 @@
     <script>
         new PerfectScrollbar(".app-container");
     </script>
+    @yield('page-js')
 </body>
 
 </html>

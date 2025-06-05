@@ -2,26 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class AdminDashboardController extends Controller
+class AdminDashboardController extends BaseAdminController
 {
-    protected $adminGuard;
-
-    public function __construct()
-    {
-        $this->middleware('XSS');
-        $this->adminGuard = Auth::guard('admin');
-    }
-
-    private function admin()
-    {
-        return $this->adminGuard;
-    }
-
     public function index()
     {
         return $this->admin()->check()

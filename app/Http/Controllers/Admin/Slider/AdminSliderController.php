@@ -2,25 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Slider;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\BaseAdminController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class AdminSliderController extends Controller
+class AdminSliderController extends BaseAdminController
 {
-    protected $adminGuard;
-
-    public function __construct()
-    {
-        $this->middleware('XSS');
-        $this->adminGuard = Auth::guard('admin');
-    }
-
-    private function admin()
-    {
-        return $this->adminGuard;
-    }
-
     public function index()
     {
         return $this->admin()->check()
