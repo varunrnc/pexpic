@@ -10,7 +10,7 @@ class AdminSliderController extends BaseAdminController
 {
     public function index()
     {
-        $sliders = Slider::Where('status', 1)->get();
+        $sliders = Slider::all();
         return $this->admin()->check()
             ? view('admin.slider.index', compact('sliders'))
             : redirect()->route('admin.login');
@@ -31,7 +31,7 @@ class AdminSliderController extends BaseAdminController
             $filename = $request->title . '_' . time() . '.' . $image->getClientOriginalExtension();
 
             $destinationPath = public_path('uploads/sliders');
-            
+
             $image->move($destinationPath, $filename);
             $slider->slider_image = $filename;
             $slider->save();
@@ -39,5 +39,33 @@ class AdminSliderController extends BaseAdminController
 
 
         return redirect()->back()->with('success', 'Slider Added Successfully!');
+    }
+
+    public function status(Request $request, $id)
+    {
+        $slider = Slider::findOrFail($id);
+        $slider->status = $request->status;
+        $slider->save();
+
+        return response()->json(['message' => 'Status updated successfully']);
+    }
+
+    public function destroy($id)
+    {
+        $slider = Slider::find($id);
+
+        if (!$slider) {
+            return response()->json(['success' => false, 'message' => 'Slider not found.'], 404);
+        }
+
+        // Optionally delete image file too
+        $imagePath = public_path('uploads/sliders/' . $slider->slider_image);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
+        $slider->delete();
+
+        return response()->json(['success' => true, 'message' => 'Slider deleted successfully.']);
     }
 }

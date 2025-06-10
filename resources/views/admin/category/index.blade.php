@@ -3,27 +3,27 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h5>Sliders</h5>
+            <h5>Category</h5>
             @if (Session::has('success'))
                 <span class="text-success">{{ Session::get('success') }}</span>
             @endif
         </div>
         <div class="card-body">
-            <form action="{{ route('admin.slider.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.category.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" class="form-control" name="title" id="title"
-                        placeholder="Enter Slider Title">
+                        placeholder="Enter Category Title">
                     @error('title')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="sliderImage" class="form-label">Choose Image</label>
-                    <input class="form-control" type="file" name="slider_image" id="sliderImage"
+                    <label for="categoryImage" class="form-label">Choose Image</label>
+                    <input class="form-control" type="file" name="category_image" id="categoryImage"
                         accept=".jpg,.jpeg,.png,.gif,.webp">
-                    @error('slider_image')
+                    @error('category_image')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
@@ -42,7 +42,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h5>Sliders List</h5>
+            <h5>Category List</h5>
         </div>
         <div class="card-body">
             <table class="table">
@@ -53,19 +53,19 @@
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
-                @foreach ($sliders as $key => $slider)
+                @foreach ($categories as $key => $category)
                     <tr>
                         <td>{{ $key + 1 }}</td>
-                        <td>{{ $slider->title }}</td>
-                        <td><img src="{{ asset('public/uploads/sliders/' . $slider->slider_image) }}" alt="slider"
+                        <td>{{ $category->category }}</td>
+                        <td><img src="{{ asset('public/uploads/categories/' . $category->category_image) }}" alt="category"
                                 class="img-fluid rounded" width="150px"></td>
                         <td>
                             <div class="form-check form-switch">
                                 <input class="form-check-input toggle-status" type="checkbox" role="switch"
-                                    data-id="{{ $slider->id }}" {{ $slider->status == 1 ? 'checked' : '' }}>
+                                    data-id="{{ $category->id }}" {{ $category->status == 1 ? 'checked' : '' }}>
                             </div>
                         </td>
-                        <td><button class="btn btn-danger btn-sm delete-slider" data-id="{{ $slider->id }}">
+                        <td><button class="btn btn-danger btn-sm delete-category" data-id="{{ $category->id }}">
                                 Delete
                             </button>
                         </td>
@@ -80,9 +80,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const preview = document.getElementById('preview');
-            const imageInput = document.getElementById('sliderImage');
+            const imageInput = document.getElementById('categoryImage');
             const switches = document.querySelectorAll('.toggle-status');
-            const deleteButtons = document.querySelectorAll('.delete-slider');
+            const deleteButtons = document.querySelectorAll('.delete-category');
 
             // Image preview logic
             imageInput.addEventListener('change', (event) => {
@@ -103,10 +103,11 @@
             // change status
             switches.forEach(function(toggle) {
                 toggle.addEventListener('change', function() {
-                    const sliderId = this.dataset.id;
+                    const categoryId = this.dataset.id;
                     const newStatus = this.checked ? 1 : 0;
-                    const updateStatusUrl = "{{ route('admin.slider.status', ['id' => ':id']) }}";
-                    let url = updateStatusUrl.replace(':id', sliderId);
+                    const updateStatusUrl =
+                    "{{ route('admin.category.status', ['id' => ':id']) }}";
+                    let url = updateStatusUrl.replace(':id', categoryId);
 
                     fetch(url, {
                             method: 'PUT',
@@ -137,14 +138,14 @@
                 });
             });
 
-            // delete slider
+            // delete category
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const sliderId = this.dataset.id;
-                    const deleteSlider = "{{ route('admin.slider.delete', ['id' => ':id']) }}";
-                    let url = deleteSlider.replace(':id', sliderId);
+                    const categoryId = this.dataset.id;
+                    const deleteCategory = "{{ route('admin.category.delete', ['id' => ':id']) }}";
+                    let url = deleteCategory.replace(':id', categoryId);
 
-                    if (confirm('Are you sure you want to delete this slider?')) {
+                    if (confirm('Are you sure you want to delete this category?')) {
                         fetch(url, {
                                 method: 'DELETE',
                                 headers: {
@@ -155,11 +156,11 @@
                             .then(response => response.json())
                             .then(data => {
                                 if (data.success) {
-                                    alert('Slider deleted successfully.');
+                                    alert('Category deleted successfully.');
                                     // Optionally remove the row from the DOM
                                     this.closest('tr').remove();
                                 } else {
-                                    alert('Failed to delete slider.');
+                                    alert('Failed to delete category.');
                                 }
                             })
                             .catch(error => {

@@ -33,10 +33,10 @@
             </a>
             <ul>
                 <li>
-                    <a href="app-emailbox.html"><i class="bx bx-radio-circle"></i>Category</a>
+                    <a href="{{route('admin.category.index')}}"><i class="bx bx-radio-circle"></i>Category</a>
                 </li>
                 <li>
-                    <a href="app-emailbox.html"><i class="bx bx-radio-circle"></i>Product</a>
+                    <a href="{{route('admin.product.index')}}"><i class="bx bx-radio-circle"></i>Product</a>
                 </li>
 
             </ul>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\Blog\AdminBlogCategoryController;
 use App\Http\Controllers\Admin\Blog\AdminBlogController;
 use App\Http\Controllers\Admin\Category\AdminCategoryController;
+use App\Http\Controllers\Admin\Product\AdminProductController;
 use App\Http\Controllers\Admin\Slider\AdminSliderController;
 use App\Http\Controllers\Web\FrontController;
 use Illuminate\Support\Facades\Route;
@@ -34,8 +35,8 @@ Route::prefix("admin")->group(function () {
             Route::post('/slider-store', 'store')->name('store');
             Route::get('/slider-edit', 'edit')->name('edit');
             Route::put('/slider-update', 'update')->name('update');
-            Route::put('/slider-status', 'status')->name('status');
-            Route::delete('/slider-delete', 'delete')->name('delete');
+            Route::put('/slider-status/{id}', 'status')->name('status');
+            Route::delete('/slider-delete/{id}', 'destroy')->name('delete');
         });
 
     Route::controller(AdminCategoryController::class)
@@ -46,8 +47,20 @@ Route::prefix("admin")->group(function () {
             Route::post('/category-store', 'store')->name('store');
             Route::get('/category-edit', 'edit')->name('edit');
             Route::put('/category-update', 'update')->name('update');
-            Route::put('/category-status', 'status')->name('status');
-            Route::delete('/category-delete', 'delete')->name('delete');
+            Route::put('/category-status/{id}', 'status')->name('status');
+            Route::delete('/category-delete/{id}', 'destroy')->name('delete');
+        });
+
+        Route::controller(AdminProductController::class)
+        ->name('admin.product.')
+        ->group(function () {
+            Route::get('/product', 'index')->name('index');
+            Route::get('/product-create', 'create')->name('create');
+            Route::post('/product-store', 'store')->name('store');
+            Route::get('/product-edit', 'edit')->name('edit');
+            Route::put('/product-update', 'update')->name('update');
+            Route::put('/product-status/{id}', 'status')->name('status');
+            Route::delete('/product-delete/{id}', 'destroy')->name('delete');
         });
 
     Route::controller(AdminBlogCategoryController::class)
