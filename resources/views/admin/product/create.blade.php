@@ -14,7 +14,7 @@
                     <input type="text" class="form-control" id="title" name="title"
                         placeholder="Enter Image Title">
                     @error('title')
-                        <span class="text-danger"></span>
+                        <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
                 <div class="mb-3">
@@ -31,8 +31,8 @@
                                     <option value="{{ $category->id }}">{{ $category->category }}</option>
                                 @endforeach
                             </select>
-                            @error('image_type')
-                                <span class="text-danger"></span>
+                            @error('category')
+                                <span class="text-danger">{{$message}}</span>
                             @enderror
                         </div>
                         <div class="col-md-4 col-12">
@@ -44,7 +44,7 @@
                                 <option value="AI">AI</option>
                             </select>
                             @error('image_type')
-                                <span class="text-danger"></span>
+                                <span class="text-danger">{{$message}}</span>
                             @enderror
                         </div>
                         <div class="col-md-4 col-12">
@@ -55,7 +55,7 @@
                                 <option value="Commercial Use">Commercial Use</option>
                             </select>
                             @error('license_type')
-                                <span class="text-danger"></span>
+                                <span class="text-danger">{{$message}}</span>
                             @enderror
                         </div>
                         <div class="col-md-6 col-12">
@@ -63,7 +63,7 @@
                             <input type="text" class="form-control" id="image_size" name="image_size"
                                 placeholder="Enter Image Size">
                             @error('image_size')
-                                <span class="text-danger"></span>
+                                <span class="text-danger">{{$message}}</span>
                             @enderror
                         </div>
                         <div class="col-md-6 col-12">
@@ -71,21 +71,27 @@
                             <input type="text" class="form-control" id="price" name="price"
                                 placeholder="Enter Image Price">
                             @error('price')
-                                <span class="text-danger"></span>
+                                <span class="text-danger">{{$message}}</span>
                             @enderror
                         </div>
                         <div class="col-md-4 col-12">
                             <label for="product" class="form-label">Choose Image File (PSD/AI)</label>
                             <input type="file" class="form-control" id="product" name="product">
+                            @error('product')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="col-md-4 col-12">
                             <label for="thumbnail" class="form-label">Thumbnail</label>
-                            <input type="file" class="form-control" id="thumbnail" name="thumbnail">
+                            <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept=".jpg, .jpeg, .webp, .png, .gif">
+                            @error('product')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="col-md-4 col-12">
 
                             <img src="{{ asset('public/assets/admin/images/images.jpeg') }}" alt="image preview"
-                                class="img-fluid w-50">
+                                class="img-fluid w-50 rounded">
                         </div>
                         <div class="col-md-4 col-12">
                             <input type="submit" value="Save" name="save" class="btn btn-success">
