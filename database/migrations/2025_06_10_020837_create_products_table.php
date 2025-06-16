@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('category_id');
             $table->string('image_type');
             $table->string('license_type');
+            $table->string('orientation');
             $table->string('image_size');
             $table->decimal('price',10);
             $table->text('product');

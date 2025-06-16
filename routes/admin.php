@@ -58,7 +58,7 @@ Route::prefix("admin")->group(function () {
             Route::get('/product-create', 'create')->name('create');
             Route::post('/product-store', 'store')->name('store');
             Route::get('/product-edit/{id}', 'edit')->name('edit');
-            Route::put('/product-update/{id}', 'update')->name('update');
+            Route::post('/product-update', 'update')->name('update');
             Route::put('/product-status/{id}', 'status')->name('status');
             Route::delete('/product-delete/{id}', 'destroy')->name('delete');
         });

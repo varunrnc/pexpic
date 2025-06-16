@@ -30,6 +30,7 @@ class AdminProductController extends Controller
             'category' => 'required',
             'image_type' => 'required',
             'license_type' => 'required',
+            'orientation' => 'required',
             'image_size' => 'required',
             'price' => 'required',
             'product' => 'required',
@@ -42,6 +43,7 @@ class AdminProductController extends Controller
         $product->category_id = $request->category;
         $product->image_type = $request->image_type;
         $product->license_type = $request->license_type;
+        $product->orientation = $request->orientation;
         $product->image_size = $request->image_size;
         $product->price = $request->price;
         
@@ -60,6 +62,46 @@ class AdminProductController extends Controller
         }
         $product->product = $productName;
         $product->thumbnail = $picName;
+
+        $product->save();
+        return redirect()->route('admin.product.index');
+    }
+
+    public function edit(Request $request)
+    {
+        $product = Product::Where('id', $request->id)->first();
+        $categories = Category::all();
+        return view('admin.product.edit', compact('product', 'categories'));
+    }
+
+    public function update(Request $request)
+    {
+        $product = Product::Where('id', $request->id)->first();
+        $product->title = $request->title;
+        $product->desc = $request->desc;
+        $product->category_id = $request->category;
+        $product->image_type = $request->image_type;
+        $product->license_type = $request->license_type;
+        $product->orientation = $request->orientation;
+        $product->image_size = $request->image_size;
+        $product->price = $request->price;
+
+        if ($request->hasFile('product')) {
+            $image = $request->file('product');
+            $extension = $image->getClientOriginalExtension();
+            $productName = Str::slug($request->title) . "-" . time() . "." . $extension;
+            $image->move(public_path('uploads/products'), $productName);
+            $product->product = $productName;
+        }
+        if ($request->hasFile('thumbnail')) {
+            $image = $request->file('thumbnail');
+            $extension = $image->getClientOriginalExtension();
+            $picName = Str::slug($request->title) . "-th-" . time() . "." . $extension;
+            $image->move(public_path('uploads/thumbnails'), $picName);
+            $product->thumbnail = $picName;
+        }
+        
+        
 
         $product->save();
         return redirect()->route('admin.product.index');
