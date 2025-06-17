@@ -51,7 +51,7 @@
                     <a href="{{route('admin.blog.category.index')}}"><i class="bx bx-radio-circle"></i>Blog Category</a>
                 </li>
                 <li>
-                    <a href="app-emailbox.html"><i class="bx bx-radio-circle"></i>Blog Content</a>
+                    <a href="{{route('admin.blog.index')}}"><i class="bx bx-radio-circle"></i>Blog Content</a>
                 </li>
 
             </ul>

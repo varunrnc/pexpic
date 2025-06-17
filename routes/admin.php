@@ -71,8 +71,8 @@ Route::prefix("admin")->group(function () {
             Route::post('/blog-category-store', 'store')->name('store');
             Route::get('/blog-category-edit', 'edit')->name('edit');
             Route::put('/blog-category-update', 'update')->name('update');
-            Route::put('/blog-category-status', 'status')->name('status');
-            Route::delete('/blog-category-delete', 'delete')->name('delete');
+            Route::put('/blog-category-status/{id}', 'status')->name('status');
+            Route::delete('/blog-category-delete/{id}', 'destroy')->name('delete');
         });
 
     Route::controller(AdminBlogController::class)
