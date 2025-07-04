@@ -19,6 +19,7 @@
                         <div class="hero__container-content">
                             <div class="container d-flex align-items-center flex-column">
                                 <h2 class="text-light text-center mb-3">Digital downloads <br>for everyone</h2>
+                                
                                 <form action="">
                                     <div class="search-bar">
                                         <div class="search-bar__icon">
